@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteJob = exports.createJob = exports.getAllJobs = void 0;
+exports.deleteJob = exports.updateJob = exports.createJob = exports.getAllJobs = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const Job_1 = __importDefault(require("../models/Job"));
 const BadRequestError_1 = require("../errors/BadRequestError");
@@ -30,6 +30,15 @@ const createJob = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(http_status_codes_1.StatusCodes.CREATED).send({ job });
 });
 exports.createJob = createJob;
+const updateJob = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const job = yield Job_1.default.findByIdAndUpdate({ _id: id }, req.body, {
+        new: true,
+        runValidators: true,
+    });
+    return res.status(http_status_codes_1.StatusCodes.OK).json({ job });
+});
+exports.updateJob = updateJob;
 const deleteJob = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const job = yield Job_1.default.deleteOne({ _id: id });

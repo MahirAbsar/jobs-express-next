@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { CustomAPIError } from "../errors/CustomAPIError";
 import Job from "../models/Job";
 import { BadRequestError } from "../errors/BadRequestError";
 
@@ -16,6 +15,15 @@ export const createJob = async (req: Request, res: Response) => {
   }
   const job = await Job.create({ title: title, applied });
   return res.status(StatusCodes.CREATED).send({ job });
+};
+
+export const updateJob = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const job = await Job.findByIdAndUpdate({ _id: id }, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  return res.status(StatusCodes.OK).json({ job });
 };
 
 export const deleteJob = async (req: Request, res: Response) => {
