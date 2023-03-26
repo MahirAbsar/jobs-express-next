@@ -18,9 +18,11 @@
     "mongoose": "^7.0.3"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/node": "^18.15.8",
     "concurrently": "^7.6.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "nodemon": "^2.0.22",
     "rimraf": "^4.4.1",

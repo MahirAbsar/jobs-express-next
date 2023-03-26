@@ -1,5 +1,6 @@
 import "dotenv/config";
 import "express-async-errors";
+import cors from "cors";
 import express, { Express, Response, Request } from "express";
 import { connectDB } from "./db/connect";
 import { notFoundMiddleWare } from "./middlewares/not-found";
@@ -8,6 +9,7 @@ import jobs from "./routes/jobs";
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/v1/jobs", jobs);
